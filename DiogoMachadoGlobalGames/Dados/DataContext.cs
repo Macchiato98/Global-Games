@@ -8,6 +8,8 @@ namespace DiogoMachadoGlobalGames.Dados
 
         public DbSet<Servicos> Servicos { get; set; }
 
+        public DbSet<Inscricoes> Incricoes { get; set; }
+
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

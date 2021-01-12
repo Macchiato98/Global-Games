@@ -7,22 +7,22 @@ using DiogoMachadoGlobalGames.Dados.Entidades;
 
 namespace DiogoMachadoGlobalGames.Controllers
 {
-    public class ServicosController : Controller
+    public class InscricoesController : Controller
     {
         private readonly DataContext _context;
 
-        public ServicosController(DataContext context)
+        public InscricoesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Servicos
+        // GET: Inscricoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Servicos.ToListAsync());
+            return View(await _context.Incricoes.ToListAsync());
         }
 
-        // GET: Servicos/Details/5
+        // GET: Inscricoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,39 +30,39 @@ namespace DiogoMachadoGlobalGames.Controllers
                 return NotFound();
             }
 
-            var servicos = await _context.Servicos
+            var inscricoes = await _context.Incricoes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (servicos == null)
+            if (inscricoes == null)
             {
                 return NotFound();
             }
 
-            return View(servicos);
+            return View(inscricoes);
         }
 
-        // GET: Servicos/Create
+        // GET: Inscricoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Servicos/Create
+        // POST: Inscricoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Mensagem")] Servicos servicos)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Apelido,Morada,CC,Localidade,DataNascimento")] Inscricoes inscricoes)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(servicos);
+                _context.Add(inscricoes);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
-            return View(servicos);
+            return View(inscricoes);
         }
 
-        // GET: Servicos/Edit/5
+        // GET: Inscricoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,22 +70,22 @@ namespace DiogoMachadoGlobalGames.Controllers
                 return NotFound();
             }
 
-            var servicos = await _context.Servicos.FindAsync(id);
-            if (servicos == null)
+            var inscricoes = await _context.Incricoes.FindAsync(id);
+            if (inscricoes == null)
             {
                 return NotFound();
             }
-            return View(servicos);
+            return View(inscricoes);
         }
 
-        // POST: Servicos/Edit/5
+        // POST: Inscricoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Mensagem")] Servicos servicos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Apelido,Morada,CC,Localidade,DataNascimento")] Inscricoes inscricoes)
         {
-            if (id != servicos.Id)
+            if (id != inscricoes.Id)
             {
                 return NotFound();
             }
@@ -94,12 +94,12 @@ namespace DiogoMachadoGlobalGames.Controllers
             {
                 try
                 {
-                    _context.Update(servicos);
+                    _context.Update(inscricoes);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServicosExists(servicos.Id))
+                    if (!InscricoesExists(inscricoes.Id))
                     {
                         return NotFound();
                     }
@@ -110,10 +110,10 @@ namespace DiogoMachadoGlobalGames.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(servicos);
+            return View(inscricoes);
         }
 
-        // GET: Servicos/Delete/5
+        // GET: Inscricoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,30 +121,30 @@ namespace DiogoMachadoGlobalGames.Controllers
                 return NotFound();
             }
 
-            var servicos = await _context.Servicos
+            var inscricoes = await _context.Incricoes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (servicos == null)
+            if (inscricoes == null)
             {
                 return NotFound();
             }
 
-            return View(servicos);
+            return View(inscricoes);
         }
 
-        // POST: Servicos/Delete/5
+        // POST: Inscricoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var servicos = await _context.Servicos.FindAsync(id);
-            _context.Servicos.Remove(servicos);
+            var inscricoes = await _context.Incricoes.FindAsync(id);
+            _context.Incricoes.Remove(inscricoes);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ServicosExists(int id)
+        private bool InscricoesExists(int id)
         {
-            return _context.Servicos.Any(e => e.Id == id);
+            return _context.Incricoes.Any(e => e.Id == id);
         }
     }
 }
