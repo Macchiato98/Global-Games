@@ -40,7 +40,7 @@ namespace GlobalGamesCET50.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Apelido,Morada,CC,Localidade,DataNascimento,ImageFile")] InscricoesUploadViewModel view)
+        public async Task<IActionResult> Inscricoes([Bind("Id,Nome,Apelido,Morada,CC,Localidade,DataNascimento,ImageFile")] InscricoesUploadViewModel view)
         {
             if (ModelState.IsValid)
             {
@@ -54,20 +54,21 @@ namespace GlobalGamesCET50.Controllers
                     path = Path.Combine(
                         Directory.GetCurrentDirectory(),
                         "wwwroot\\images\\Avatar",
-                        view.ImageFile.FileName);
+                        file);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Avatar/{view.ImageFile.FileName}";
+                    path = $"~/images/Avatar/{file}";
 
                 }
 
                 var avatar = this.ToInscricoes(view, path);
-
+                
                 _context.Add(avatar);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(view);
@@ -85,7 +86,7 @@ namespace GlobalGamesCET50.Controllers
                 Localidade = view.Localidade,
                 DataNascimento = view.DataNascimento,
                 ImageUrl = path,
-                /*User = view.User,*/
+                User = view.User,
 
             };
         }

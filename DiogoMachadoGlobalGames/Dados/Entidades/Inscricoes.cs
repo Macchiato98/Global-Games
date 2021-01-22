@@ -18,12 +18,13 @@ namespace DiogoMachadoGlobalGames.Dados.Entidades
 
         public string Localidade { get; set; }
 
-
         [Display(Name = "Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
 
         [Display(Name = "Imagem")]
         public string ImageUrl { get; set; }
+
+        public User User { get; set; }
 
 
 

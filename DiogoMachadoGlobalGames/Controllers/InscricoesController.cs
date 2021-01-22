@@ -1,29 +1,29 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using DiogoMachadoGlobalGames.Dados;
+using DiogoMachadoGlobalGames.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DiogoMachadoGlobalGames.Dados;
-using DiogoMachadoGlobalGames.Dados.Entidades;
-using DiogoMachadoGlobalGames.Models;
-using System.IO;
-using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DiogoMachadoGlobalGames.Controllers
 {
+    [Authorize]
     public class InscricoesController : Controller
     {
-        
+
         private readonly DataContext _context;
         private readonly IInscricoesRepository inscricoesRepository;
+        private readonly IUserHelper userHelper;
 
-        public InscricoesController(DataContext context, IInscricoesRepository inscricoesRepository)
+        public InscricoesController(DataContext context, IInscricoesRepository inscricoesRepository, IUserHelper userHelper)
         {
             _context = context;
             this.inscricoesRepository = inscricoesRepository;
-
+            this.userHelper = userHelper;
         }
 
-        
+
         // GET: Inscricoes
         public async Task<IActionResult> Index()
         {
@@ -47,7 +47,7 @@ namespace DiogoMachadoGlobalGames.Controllers
 
             return View(inscricoes);
         }
-            
+
         // POST: Inscricoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
