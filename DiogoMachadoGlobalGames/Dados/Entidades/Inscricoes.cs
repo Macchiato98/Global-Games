@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DiogoMachadoGlobalGames.Dados.Entidades
 {
-    public class Inscricoes
+    public class Inscricoes : IEntity
     {
         public int Id { get; set; }
 
@@ -18,8 +18,12 @@ namespace DiogoMachadoGlobalGames.Dados.Entidades
 
         public string Localidade { get; set; }
 
+
         [Display(Name = "Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
+
+        [Display(Name = "Imagem")]
+        public string ImageUrl { get; set; }
 
 
 

@@ -29,6 +29,10 @@ namespace DiogoMachadoGlobalGames
 
             });
 
+            services.AddTransient<SeedDb>();
+            services.AddScoped<IInscricoesRepository, InscricoesRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
+
 
             services.Configure<CookiePolicyOptions>(options =>
             {

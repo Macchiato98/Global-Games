@@ -1,16 +1,14 @@
-﻿@model DiogoMachadoGlobalGames.Dados.Entidades.Inscricoes
+﻿@model DiogoMachadoGlobalGames.Models.InscricoesUploadViewModel
 
 @{
     ViewData["Title"] = "Inscricoes";
 }
 
-<h2>Create</h2>
-
 <h4>Inscricoes</h4>
 <hr />
 <div class="dark">
     <div>
-        <form asp-controller="Inscricoes" asp-action="Create" class="formIns">
+        <form asp-controller="Inscricoes" asp-action="Create" class="formIns" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
@@ -43,12 +41,14 @@
                 <span asp-validation-for="DataNascimento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input id="botao" type="submit" value="Enviar" class="button_1" />
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
+            <input id="botao" type="submit" value="Enviar" class="button_1" />
         </form>
     </div>
 </div>
-
 
 @section Scripts {
 
